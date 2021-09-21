@@ -7,12 +7,51 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/pro
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
+
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
 
 var hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
+}
+
+const Login = () => {
+
+  const elemento = document.createElement("div");
+  elemento.id = "login1"; 
+  elemento.classList.add("login");
+  document.getElementsByClassName("container d-flex flex-column flex-md-row justify-content-between")[0].appendChild(elemento);
+
+ const elemento1 = document.createElement("div");
+ elemento1.id = "imgs"; 
+ document.getElementById("login1").appendChild(elemento1);
+
+ var imagen = document.createElement("img");
+ imagen.src = "img/icono.png";
+ imagen.classList.add("imagen");
+ var src = document.getElementById("imgs");
+ src.appendChild(imagen);
+
+ const elemento2 = document.createElement("div");
+ elemento2.className += "py-2 d-none d-md-inline-block";
+ elemento2.id = "datos";
+ document.getElementById("imgs").appendChild(elemento2);
+
+};
+
+var user = localStorage.getItem("login", user);
+var pass = localStorage.getItem("password", pass);
+
+function validacion() {
+        
+        if(user == null){
+
+            location.href="login.html";
+
+        }else{
+            document.getElementById("datos").innerHTML=localStorage.getItem("login");
+        }
 }
 
 var getJSONData = function(url){
@@ -44,4 +83,6 @@ var getJSONData = function(url){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  Login();
+  validacion();
 });
