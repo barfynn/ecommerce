@@ -18,27 +18,77 @@ var hideSpinner = function(){
 
 const Login = () => {
 
-  const elemento = document.createElement("div");
-  elemento.id = "login1"; 
-  elemento.classList.add("login");
-  document.getElementsByClassName("container d-flex flex-column flex-md-row justify-content-between")[0].appendChild(elemento);
+  const divlogin = document.createElement("div");
+  divlogin.id = "login1";
+  document.getElementsByClassName("container d-flex flex-column flex-md-row justify-content-between")[0].appendChild(divlogin);
 
- const elemento1 = document.createElement("div");
- elemento1.id = "imgs"; 
- document.getElementById("login1").appendChild(elemento1);
+  const button = document.createElement('button');
+  button.className += "dropbtn dropdown-toggle";
+  button.id = "bton";
+  button.onclick = myFunction
+  document.getElementById("login1").appendChild(button);
 
- var imagen = document.createElement("img");
- imagen.src = "img/icono.png";
- imagen.classList.add("imagen");
- var src = document.getElementById("imgs");
- src.appendChild(imagen);
+  var imagen = document.createElement("img");
+  imagen.src = "img/icono.png";
+  imagen.classList.add("imagen");
+  var src = document.getElementById("bton");
+  src.appendChild(imagen);
 
- const elemento2 = document.createElement("div");
- elemento2.className += "py-2 d-none d-md-inline-block";
- elemento2.id = "datos";
- document.getElementById("imgs").appendChild(elemento2);
+  const divenlaces = document.createElement("div");
+  divenlaces.id = "myDropdown";
+  divenlaces.classList.add("dropdown-content");
+  document.getElementById("login1").appendChild(divenlaces);
+
+  let a = document.createElement("a");
+  a.setAttribute("href", "cart.html");
+  let aTexto = document.createTextNode("Ver carrito");
+  a.appendChild(aTexto);
+  document.getElementById("myDropdown").appendChild(a);
+
+  const enlacePerfil = document.createElement("a");
+  enlacePerfil.setAttribute("href", "my-profile.html");
+  const texto = document.createTextNode("Mi perfil");
+  enlacePerfil.appendChild(texto);
+  document.getElementById("myDropdown").appendChild(enlacePerfil);
+
+  const enlaceSesion = document.createElement("a");
+  enlaceSesion.onclick = CerrarSesion
+  enlaceSesion.setAttribute("href", "CerrarSesion()")
+  enlaceSesion.setAttribute("href", "login.html");
+  const texto1 = document.createTextNode("Cerrar sesión");
+  enlaceSesion.appendChild(texto1);
+  document.getElementById("myDropdown").appendChild(enlaceSesion);
+
+  const nombreDiv = document.createElement("div");
+  nombreDiv.className += "py-2 d-none d-md-inline-block";
+  nombreDiv.id = "datos";
+  document.getElementById("bton").appendChild(nombreDiv);
 
 };
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show"); 
+}
+
+function CerrarSesion() {
+  localStorage.removeItem("login");
+  localStorage.removeItem("password");
+  sessionStorage.removeItem('login');
+}
+      
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+     }
+}
+
 
 var user = localStorage.getItem("login", user);
 var pass = localStorage.getItem("password", pass);

@@ -43,6 +43,46 @@ function mostrarComentarios(array){
     }
 }
 
+
+function mostrarRelacionados(array){
+
+    let htmlContentToAppend = "";
+    
+
+        htmlContentToAppend += `
+           <a <a href="product-info.html" class="list-group-item list-group-item-action">
+             <div>
+               <div class="col-3" >
+                 <img src=" `+product[1].imgSrc+` " class="img-thumbnail">
+               </div>  
+               <div class="col">
+                   <div class="d-flex w-100 justify-content-between">
+                     <h4 class="mb-1"> `+ product[1].name +` </h4>
+                   </div>
+                   <p class="mb-1"> `+product[1].cost+` `+product[1].currency+` </p>
+                 </div>
+               </div>
+            </div>
+          </a>
+          <a <a href="product-info.html" class="list-group-item list-group-item-action">
+             <div>
+               <div class="col-3" >
+                 <img src=" `+product[3].imgSrc+` " class="img-thumbnail">
+               </div>  
+               <div class="col">
+                   <div class="d-flex w-100 justify-content-between">
+                     <h4 class="mb-1"> `+ product[3].name +` </h4>
+                   </div>
+                   <p class="mb-1"> `+product[3].cost+` `+product[3].currency+` </p>
+                 </div>
+               </div>
+            </div>
+          </a>
+       ` 
+
+        document.getElementById("relatedProd").innerHTML = htmlContentToAppend;
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok")
@@ -71,6 +111,14 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             comentarios = resultObj.data;
             mostrarComentarios(comentarios);
+        }
+    });
+
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            product = resultObj.data;
+            mostrarRelacionados(product);
         }
     });
 });
