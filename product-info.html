@@ -64,32 +64,47 @@
         </dd>
 
         <dt>Productos relacionados</dt>
+        <dd>
+          <p id="relatedProd"></p>
+        </dd>
       </dl>
-      <div id="relatedProd"></div>
       <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a><br>
       <div>
         <h3>Comentarios</h3>
         <hr class="my-3">
         <div class="container p-5">
           <form>
-            <textarea name="cuerpo" rows="3" cols="30" placeholder="Añade tu comentario"></textarea><br>
-            
-             <div class="puntuacion">
-               <p>Añade una puntuación:</p>
-                <input id="radio1" type="radio" name="estrellas" value="5"onclick="document.getElementById('valor').innerHTML='5'"><!--
-                --><label for="radio1">★</label><!--
-                --><input id="radio2" type="radio" name="estrellas" value="4" onclick="document.getElementById('valor').innerHTML='4'"><!--
-                --><label for="radio2">★</label><!--
-                --><input id="radio3" type="radio" name="estrellas" value="3" onclick="document.getElementById('valor').innerHTML='3'"><!--
-                --><label for="radio3">★</label><!--
-                --><input id="radio4" type="radio" name="estrellas" value="2"onclick="document.getElementById('valor').innerHTML='2'"><!--
-                --><label for="radio4">★</label><!--
-                --><input id="radio5" type="radio" name="estrellas" value="1" onclick="document.getElementById('valor').innerHTML='1'"><!--
-                --><label for="radio5">★</label><br>
-              Clickeaste el número: <span id="valor"></span>
-              </div><br>
-            <input class="subir" type="submit" value="Enviar">
-      
+            <div class="comentariocard card">
+              <div class="row">
+                  <div class="col-10">
+                      <div class="comment-box ml-2">
+                          <h4>Añade tu comentario</h4>
+                          <div class="rating"> <input type="radio" name="rating" value="5" id="5">
+                            <label for="5">☆</label> 
+                            <input type="radio" name="rating" value="4" id="4">
+                            <label for="4">☆</label> 
+                            <input type="radio" name="rating" value="3" id="3">
+                            <label for="3">☆</label> 
+                            <input type="radio" name="rating" value="2" id="2">
+                            <label for="2">☆</label> 
+                            <input type="radio" name="rating" value="1" id="1">
+                            <label for="1">☆</label> 
+                          </div>
+                          <div class="comment-area"> <textarea class="form-control" placeholder="Cuentanos tu opinión" rows="4"></textarea> </div>
+                          <div class="comment-btns mt-2">
+                              <div class="row">
+                                  <div class="col-6">
+                                      <div class="pull-right"> 
+                                        <button class="btn btn-success send btn-sm">Enviar 
+                                          <i class="fa fa-long-arrow-right ml-1"></i></button> 
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
           </form> 
         </div>
         

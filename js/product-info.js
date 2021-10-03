@@ -7,19 +7,37 @@ function mostrarImagenes(array){
 
     let htmlContentToAppend = "";
 
-    for(let i = 0; i < array.length; i++){
-        let imageSrc = array[i];
-
         htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
-            </div>
-        </div>
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                          <div class="carousel-item active">
+                             <img src="` + product.images[0] + `" alt="img">
+                          </div>
+                          <div class="carousel-item">
+                             <img src="` + product.images[1] + `" alt="img1">
+                          </div>
+                          <div class="carousel-item">
+                             <img src="` + product.images[2] + `" alt="img2">
+                          </div>
+                          <div class="carousel-item">
+                             <img src="` + product.images[3] + `" alt="img3">
+                          </div>
+                          <div class="carousel-item">
+                             <img src="` + product.images[4] + `" alt="img3">
+                          </div>
+                     </div>
+                       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Previous</span>
+                       </a>
+                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Next</span>
+                       </a>
+               </div>
         `
 
         document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
-    }
 }
 
 function mostrarComentarios(array){
@@ -31,12 +49,19 @@ function mostrarComentarios(array){
         let comments = array[i];
 
         htmlContentToAppend += `
-            <div class= "comentarios">
-                <p >puntuación: ` + comments.score + ` </p>
-                <p >` + comments.description + ` </p>
-                <p >` + comments.user + ` </p>
-                <p >` + comments.dateTime + ` </p>
+        <div >
+             <div class="col-md-6">
+                  <div class="p-3 bg-white rounded">
+                       <div class="card p-3 comentarios">
+                          <p class="font-weight-bold text-primary">` + comments.user + ` </p>
+                          <p>puntuación: ` + comments.score + ` </p>
+                          <p class="font-weight-bold">` + comments.description + ` </p>
+                          <p>` + comments.dateTime + ` </p>
+                       </div>
+                   </div> 
+               </div>
             </div>
+        </div>
         `
 
         document.getElementById("comments").innerHTML = htmlContentToAppend;
@@ -50,34 +75,39 @@ function mostrarRelacionados(array){
     
 
         htmlContentToAppend += `
-           <a <a href="product-info.html" class="list-group-item list-group-item-action">
-             <div>
-               <div class="col-3" >
-                 <img src=" `+product[1].imgSrc+` " class="img-thumbnail">
-               </div>  
-               <div class="col">
-                   <div class="d-flex w-100 justify-content-between">
-                     <h4 class="mb-1"> `+ product[1].name +` </h4>
-                   </div>
-                   <p class="mb-1"> `+product[1].cost+` `+product[1].currency+` </p>
-                 </div>
-               </div>
-            </div>
-          </a>
-          <a <a href="product-info.html" class="list-group-item list-group-item-action">
-             <div>
-               <div class="col-3" >
-                 <img src=" `+product[3].imgSrc+` " class="img-thumbnail">
-               </div>  
-               <div class="col">
-                   <div class="d-flex w-100 justify-content-between">
-                     <h4 class="mb-1"> `+ product[3].name +` </h4>
-                   </div>
-                   <p class="mb-1"> `+product[3].cost+` `+product[3].currency+` </p>
-                 </div>
-               </div>
-            </div>
-          </a>
+        <div class="tarjetabox">
+            <div class="tarjeta">
+               <a href="product-info.html" class="list-group-item-action">
+                  <div>
+                      <div>
+                       <img src=" `+product[1].imgSrc+` " class="img-thumbnail">
+                      </div>  
+                      <div class="col">
+                         <div >
+                           <h4 class="textocard"> `+ product[1].name +` </h4>
+                         </div>
+                         <p class="textocard" > `+product[1].cost+` `+product[1].currency+` </p>
+                      </div>
+                  </div>
+              </a>
+           </div>
+
+          <div class="tarjeta">
+                <a href="product-info.html" class="list-group-item-action">
+                    <div>
+                       <div>
+                         <img src=" `+product[3].imgSrc+` " class="img-thumbnail">
+                       </div>  
+                       <div class="col">
+                           <div>
+                             <h4 class="textocard"> `+ product[3].name +` </h4>
+                           </div>
+                           <p class="textocard"> `+product[3].cost+` `+product[3].currency+` </p>
+                        </div>
+                    </div>
+                </a>
+          </div>
+        </div>
        ` 
 
         document.getElementById("relatedProd").innerHTML = htmlContentToAppend;
@@ -102,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             productCurrencyHTML.innerHTML = product.currency;
             productSoldCountHTML.innerHTML = product.soldCount;
             productCategoryHTML.innerHTML = product.category;
-            mostrarImagenes(product.images);
         }
     });
 
@@ -121,4 +150,12 @@ document.addEventListener("DOMContentLoaded", function(e){
             mostrarRelacionados(product);
         }
     });
+
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+      if (resultObj.status === "ok")
+      {
+          product = resultObj.data;
+          mostrarImagenes(product);
+      }
+  });
 });

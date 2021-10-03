@@ -19,6 +19,7 @@ var hideSpinner = function(){
 const Login = () => {
 
   const divlogin = document.createElement("div");
+  divlogin.classList.add("dropdown");
   divlogin.id = "login1";
   document.getElementsByClassName("container d-flex flex-column flex-md-row justify-content-between")[0].appendChild(divlogin);
 
@@ -28,11 +29,11 @@ const Login = () => {
   button.onclick = myFunction
   document.getElementById("login1").appendChild(button);
 
-  var imagen = document.createElement("img");
-  imagen.src = "img/icono.png";
-  imagen.classList.add("imagen");
+  var image = document.createElement("img");
+  image.src = "img/icono.png";
+  image.classList.add("imagen");
   var src = document.getElementById("bton");
-  src.appendChild(imagen);
+  src.appendChild(image);
 
   const divenlaces = document.createElement("div");
   divenlaces.id = "myDropdown";
@@ -65,30 +66,31 @@ const Login = () => {
   document.getElementById("bton").appendChild(nombreDiv);
 
 };
-
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show"); 
-}
-
 function CerrarSesion() {
   localStorage.removeItem("login");
   localStorage.removeItem("password");
   sessionStorage.removeItem('login');
 }
-      
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-            }
-          }
-     }
-}
 
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show"); 
+}     
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) 
+  if (!event.target.matches('.imagen'))
+  if (!event.target.matches('#datos'))
+  {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 
 var user = localStorage.getItem("login", user);
 var pass = localStorage.getItem("password", pass);
