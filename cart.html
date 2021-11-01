@@ -42,13 +42,48 @@
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+  <div class="bodycart">
+    <div class="cardcart">
+    <div class="row">
+       <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Carrito de compras</b></h4></br>
+                    </div>
+                </div>
+            </div>
+              <div id="carrito" class="back-to-shop"><a class="a" href="products.html">&leftarrow;</a><span class="text-muted">Continuar comprando</span></div>
+                 </div>
+                 <div class="col-md-4 summary">
+                     <div>
+                         <h5 class="h5"><b>Suma</b></h5>
+                     </div>
+                     <hr>
+                     <div class="row">
+                         <div class="col" style="padding-left:0;">Subtotal</div>
+                         <div id="resultado" class="col text-right"></div>
+                     </div>
+                     <form class="form">
+                         <p>Costo de envío</p> <select class="select">
+                             <option id="Cenvio" value="1" class="text-muted">Envío normal - $20</option>
+                             <option id="Cenvio" value="2" class="text-muted">Envío rápido - $50</option>
+                             <option id="Cenvio" value="3" class="text-muted">Sin envío</option>
+                         </select>
+                         <p>Método de pago</p>
+                         <label class="radio"> <input class="input" type="radio" name="card" value="payment" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png" /></span> </label>
+                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png" /></span> </label>
+                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/ultraviolet/48/000000/amex.png" /></span> </label>
+                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span> </label>
+                     </form>
+                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                         <div class="col">TOTAL</div>
+                         <div id="total" class="col text-right"></div>
+                     </div> <button class="btn2">ENVIAR</button>
+                 </div>
+              </div>
+            </div>
+            </div>
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
