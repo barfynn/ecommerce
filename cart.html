@@ -53,7 +53,8 @@
                     </div>
                 </div>
             </div>
-              <div id="carrito" class="back-to-shop"><a class="a" href="products.html">&leftarrow;</a><span class="text-muted">Continuar comprando</span></div>
+              <div id="carrito"></div>
+              <div class="back-to-shop"><a class="a" href="products.html">&leftarrow;</a><span class="text-muted">Continuar comprando</span></div>
                  </div>
                  <div class="col-md-4 summary">
                      <div>
@@ -64,25 +65,68 @@
                          <div class="col" style="padding-left:0;">Subtotal</div>
                          <div id="resultado" class="col text-right"></div>
                      </div>
-                     <form class="form">
-                         <p>Costo de envío</p> <select class="select">
-                             <option id="Cenvio" value="1" class="text-muted">Envío normal - $20</option>
-                             <option id="Cenvio" value="2" class="text-muted">Envío rápido - $50</option>
-                             <option id="Cenvio" value="3" class="text-muted">Sin envío</option>
+                     <form class="form"><hr>
+                      <h5 class="h6" ><b>Método de envío</b></h6>
+                         <div><label class="credit-card-label">Dirección</label><input id="calle" type="text" class="form-control credit-inputs" placeholder="calle"></div><br>
+                         <div><input type="text" class="form-control credit-inputs" id="num" placeholder="número"></div><br>
+                         <div><input type="text" class="form-control credit-inputs" id="esq" placeholder="esquina"></div><br>
+                         <select onclick="check()" id="envios" class="select">
+                             <option id="enviostipo" value="nulo" selected >-Tipo de envío-</option> 
+                             <option id="prem" name="envio" value="premium" class="text-muted">Premium (2-5 días) - Costo del 15% sobre el subtotal</option>
+                             <option id="exp" name="envio" value="express" class="text-muted">Express (5-8 días) - Costo del 7% sobre el subtotal</option>
+                             <option id="stan" name="envio" value="standar" class="text-muted">Standar (12-15 días) - Costo del 5% sobre el subtotal</option>
                          </select>
-                         <p>Método de pago</p>
-                         <label class="radio"> <input class="input" type="radio" name="card" value="payment" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png" /></span> </label>
-                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png" /></span> </label>
-                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/ultraviolet/48/000000/amex.png" /></span> </label>
-                         <label class="radio"> <input class="input" type="radio" name="card" value="payment"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span> </label>
-                     </form>
-                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                          Forma de pago
+                        </button><br>
+                        
+                           <!-- Modal -->
+                           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                             <div class="modal-dialog">
+                               <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h5 class="modal-title" id="exampleModalLabel">Seleccione una forma de pago</h5>
+                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                   </button>
+                                 </div>
+                                 <div class="modal-body">
+                                   <div>
+
+                                     <label>
+                                       <input type="radio" id="radiotarjeta" name="pago"/>Tarjeta de crédito
+                                     </label><br>
+                                     <div style="display: none;" id="tarjetacredito">
+                                      <label class="radio"> <input class="input" type="radio" name="card" value="tres" checked> <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png" /></span> </label>
+                                <label class="radio"> <input class="input" type="radio" name="card" value="cuatro"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png" /></span> </label>
+                                <label class="radio"> <input class="input" type="radio" name="card" value="cinco"> <span><img width="30" src="https://img.icons8.com/ultraviolet/48/000000/amex.png" /></span> </label>
+                                <label class="radio"> <input class="input" type="radio" name="card" value="seis"> <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span> </label><br>
+                                       <input type="text" id="numtarg" placeholder="Número de tarjeta"><br> 
+                                       <label >Fecha de vencimiento</label><br><input type="text"  id="date" placeholder="mes/año">
+                                       
+                                     </div>
+                                  
+                                     <label>
+                                       <input type="radio" id="radiobanco" name="pago"/>Transferencia bancaria
+                                     </label><br>
+                                     <div style="display: none;" id="cuentabancaria">
+                                       <input type="text" id="numcuenta" placeholder="Número de cuenta">
+                                     </div>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                   <button type="button" id="saving" onclick="paymentform()" class="btn btn-primary">Guardar</button>
+                                 </div>
+                               </div>
+                             </div>
+                           </div><br>
+                         </form>
+                    </div> 
+            </div>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                          <div class="col">TOTAL</div>
                          <div id="total" class="col text-right"></div>
-                     </div> <button class="btn2">ENVIAR</button>
+                     </div><button id="sendButton" onclick="Validate(cantidad.value, calle.value, num.value, esq.value)" class="btn2">ENVIAR</button>
                  </div>
-              </div>
-            </div>
             </div>
   </div>
   <div id="spinner-wrapper">

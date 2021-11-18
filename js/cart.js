@@ -1,13 +1,11 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de   
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-
 function carrito(array) {
     let htmlContentToAppend = "";
 
     
     for(let i = 0; i < array.length; i++){
-        let articles = array[i];
 
 
              htmlContentToAppend += `
@@ -19,7 +17,7 @@ function carrito(array) {
                              </div>
                              <div class="quantity-container col">
                                <button class="decrease" type="button" title="Decrease Quantity">-</button>
-                               <input id="cantidad"" class="quantity-amount" name="" value="${cart.articles[i].count}" />
+                               <input id="cantidad" class="quantity-amount" value="${cart.articles[i].count}" />
                                <button class="increase" type="button" title="Increase Quantity">+</button>
                              </div>
                     
@@ -35,7 +33,6 @@ function carrito(array) {
 function multiplicar(array){
     
     for(let i = 0; i < array.length; i++){
-        let articles = array[i];
 
        cantidad = document.getElementById("cantidad");
        n1 = cantidad.value;
@@ -48,7 +45,6 @@ function multiplicar(array){
 function Subtotal(array){
 
     for(let i = 0; i < array.length; i++){
-        let articles = array[i];
 
        cantidad = document.getElementById("cantidad");
        n1 = cantidad.value;
@@ -58,20 +54,109 @@ function Subtotal(array){
     }
 }
 
-
 function total(array){
     
     for(let i = 0; i < array.length; i++){
-        let articles = array[i];
 
+       x = document.getElementById("envios").value;
        cantidad = document.getElementById("cantidad");
        n1 = cantidad.value;
        n2 = cart.articles[i].unitCost;
-       r = n1*n2;
+       r = n1*n2; 
        document.getElementById("total").innerHTML = '$' + r;
+      
     }   
+    if (x === "premium"){
+        e = r * 0.15;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
+    if (x === "express"){
+        e = r * 0.07;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
+    if (x === "standar"){
+        e = r * 0.05;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
 }
 
+
+function check() {
+    x = document.getElementById("envios").value;
+    if (x === "premium"){
+        e = r * 0.15;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
+    if (x === "express"){
+        e = r * 0.07;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
+    if (x === "standar"){
+        e = r * 0.05;
+        t = e + r;
+        document.getElementById("total").innerHTML = '$' + t;
+    }
+}
+
+function paymentform() {
+    cardnumber = document.getElementById("numtarg").value;
+    date = document.getElementById("date").value;
+    accnumber = document.getElementById("numcuenta").value;
+
+    if(document.getElementById("radiotarjeta").checked == true){
+        if (cardnumber ==="" || date ==="" ){  
+        alert("debes ingresar número de tarjeta y fecha de vencimiento");}else{
+            alert("Guardado con éxito");
+              
+
+        }
+
+    } else if(document.getElementById("radiobanco").checked == true){
+        if (accnumber.trim()===""){
+        alert("debes ingresar número de cuenta");} else {
+            alert("Guardado con éxito");
+        }
+        
+    }
+}
+
+function Validate(cantidad, calle, num, esq){
+    envios = document.getElementById("enviostipo");
+
+    if (cantidad.trim()==="" || calle.trim()==="" || num.trim()==="" || esq.trim() ==="" || envios.selected == true){
+        alert("Debe completar todos los campos");
+
+    } else {
+        delet();
+        alert("La orden ha sido generada con éxito");
+    }
+}
+
+function delet() {
+    document.getElementById("calle").value = "";
+    document.getElementById("num").value = "";
+    document.getElementById("esq").value = "";
+    document.getElementById("envios").value = "nulo";
+};
+
+
+const formapago = () =>{
+    document.getElementById("radiotarjeta").addEventListener("click", (e) => {
+      document.getElementById("cuentabancaria").style.display = "none";
+      document.getElementById("tarjetacredito").style.display = "block";
+    });
+  
+    document.getElementById("radiobanco").addEventListener ("click", (e) => {
+      document.getElementById("tarjetacredito").style.display = "none";
+      document.getElementById("cuentabancaria").style.display = "block";
+    });
+  
+};
 
 function flechas() {
 
@@ -110,10 +195,11 @@ document.addEventListener('keyup', (event) => {
     multiplicar(cart.articles);
     Subtotal(cart.articles);
     total(cart.articles);
-  }); 
+}); 
 
   
 document.addEventListener("DOMContentLoaded", function(e){
+    
     getJSONData(CART_INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
@@ -123,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             Subtotal(cart.articles);
             total(cart.articles);
             flechas(cart.articles);
+            formapago();
         }
     });
 });

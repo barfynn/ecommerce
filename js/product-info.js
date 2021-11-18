@@ -68,6 +68,25 @@ function mostrarComentarios(array){
     }
 }
 
+function comentario(){
+    if(localStorage.getItem("login") !="" && document.getElementById("areatext").value !=""){
+		htmlContentToAppend +=  `
+        <div >
+             <div class="col-md-6">
+                  <div class="p-3 bg-white rounded">
+                       <div class="card p-3 comentarios">
+                          <p class="font-weight-bold text-primary">` + localStorage.getItem("login") + ` </p>
+                          <p class="font-weight-bold">` + document.getElementById("areatext").value + ` </p>
+                       </div>
+                   </div> 
+               </div>
+            </div>
+        </div>
+        `
+		document.getElementById('hola').innerHTML+= htmlContentToAppend;
+	}
+}
+
 
 function mostrarRelacionados(array){
 
