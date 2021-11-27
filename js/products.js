@@ -65,6 +65,33 @@ function showProduct(array){
   }
 }
 
+const form = document.querySelector('#buscar');
+const resultado = document.querySelector('#rowresponsive');
+
+const filtrar = () => {
+    resultado.innerHTML="";
+    const text = form.value.toLowerCase();
+    for(let product of currentProductArray){
+        let nombre = product.name.toLowerCase();
+        let descrip = product.description.toLowerCase();
+
+        if(nombre.indexOf(text) !== -1 || descrip.indexOf(text) !== -1){
+            resultado.innerHTML += `
+            <div class="col-md-4">
+                   <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                     <img class="bd-placeholder-img card-img-top"  src="`+product.imgSrc+`">
+                     <h3 class="m-3">`+ product.name +` (`+product.soldCount+`)</h3>
+                     <div class="card-body">
+                       <p class="card-text">`+product.description+`</p>
+                       <p class="mb-1"> `+product.cost+` `+product.currency+` </p>
+                     </div>
+                   </a>
+                 </div>
+            ` 
+        }
+    }
+};
+
 function sortAndShowProduct(sortClasificacion, productArray){
   currentSortClasificacion = sortClasificacion;
 
@@ -86,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             showProduct(currentProductArray);
             hideSpinner();
             sortAndShowProduct(ORDENPRECIO_ASC, resultObj.data);
+            form.addEventListener("keyup", filtrar);
         }
         
     });
@@ -127,4 +155,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showProduct();
   });
 });
-

@@ -69,24 +69,88 @@ function mostrarComentarios(array){
 }
 
 function comentario(){
-    if(localStorage.getItem("login") !="" && document.getElementById("areatext").value !=""){
-		htmlContentToAppend +=  `
+
+
+    let htmlContentToAppend = "";
+    artex = document.getElementById("areatext").value;
+    usuario = localStorage.getItem("login", user);
+
+    if (artex !== "" && user !== ""){
+
+
+    htmlContentToAppend += `
         <div >
              <div class="col-md-6">
                   <div class="p-3 bg-white rounded">
                        <div class="card p-3 comentarios">
-                          <p class="font-weight-bold text-primary">` + localStorage.getItem("login") + ` </p>
-                          <p class="font-weight-bold">` + document.getElementById("areatext").value + ` </p>
+                          <p class="font-weight-bold text-primary">${usuario}</p>
+                          <p id="estrellas">puntuación: </p>
+                          <p class="font-weight-bold">${artex}</p>
+                          <p id="date"></p>
                        </div>
                    </div> 
                </div>
             </div>
         </div>
         `
-		document.getElementById('hola').innerHTML+= htmlContentToAppend;
-	}
-}
+    document.getElementById("hola").innerHTML = htmlContentToAppend;
+    alert("Su comentario se ha ingresado con éxito");
+    }
+    stars();
+    fecha();
+    hora();
+    document.getElementById("areatext").value="";
+};
 
+function fecha(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+
+   if (dd < 10) {
+     dd = '0' + dd;
+    }
+
+   if (mm < 10) {
+     mm = '0' + mm;
+   }
+
+   today = yyyy + '-' + mm + '-' + dd;
+
+   document.getElementById("date").innerHTML = today;
+
+};
+
+function hora(){
+    var hour = new Date();
+    var hh = hour.getHours();
+    var mn = hour.getMinutes();
+    var ss = hour.getSeconds();
+
+    hour = hh + ':' + mn + ':' + ss;
+
+    document.getElementById("date").innerHTML += ' '+ hour;
+
+}; 
+
+function stars(){
+    if(document.getElementById("5").checked == true){
+        document.getElementById("estrellas").innerHTML += '5';
+    }
+    if(document.getElementById("4").checked == true){
+        document.getElementById("estrellas").innerHTML += '4';
+    }
+    if(document.getElementById("3").checked == true){
+        document.getElementById("estrellas").innerHTML += '3';
+    }
+    if(document.getElementById("2").checked == true){
+        document.getElementById("estrellas").innerHTML += '2';
+    }
+    if(document.getElementById("1").checked == true){
+        document.getElementById("estrellas").innerHTML += '1';
+    }
+};
 
 function mostrarRelacionados(array){
 

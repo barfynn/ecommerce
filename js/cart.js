@@ -6,7 +6,7 @@ function carrito(array) {
 
     
     for(let i = 0; i < array.length; i++){
-
+        
 
              htmlContentToAppend += `
                      <div class="row border-top border-bottom">
@@ -20,16 +20,14 @@ function carrito(array) {
                                <input id="cantidad" class="quantity-amount" value="${cart.articles[i].count}" />
                                <button class="increase" type="button" title="Increase Quantity">+</button>
                              </div>
-                    
                              <div class="col" id="num2" >${cart.articles[i].unitCost} ${cart.articles[i].currency}</div>
                              <div class="col" id="totalUnit" ></div><span class="close">&#10005;</span>
                          </div>
                      </div>
             `
-              document.getElementById("carrito").innerHTML = htmlContentToAppend;
+            document.getElementById("carrito").innerHTML = htmlContentToAppend;
     }
 }
-
 function multiplicar(array){
     
     for(let i = 0; i < array.length; i++){
@@ -45,26 +43,24 @@ function multiplicar(array){
 function Subtotal(array){
 
     for(let i = 0; i < array.length; i++){
-
-       cantidad = document.getElementById("cantidad");
-       n1 = cantidad.value;
-       n2 = cart.articles[i].unitCost;
-       r = n1*n2;
-       document.getElementById("resultado").innerHTML = '$' + r;
+        cantidad = document.getElementById("cantidad");
+        n1 = cantidad.value;
+        n2 = cart.articles[i].unitCost;
+        r = n1*n2; 
+        document.getElementById("resultado").innerHTML = '$' + r;
     }
-}
+};
 
 function total(array){
-    
-    for(let i = 0; i < array.length; i++){
 
-       x = document.getElementById("envios").value;
-       cantidad = document.getElementById("cantidad");
-       n1 = cantidad.value;
-       n2 = cart.articles[i].unitCost;
-       r = n1*n2; 
-       document.getElementById("total").innerHTML = '$' + r;
-      
+    for(let i = 0; i < array.length; i++){        
+        x = document.getElementById("envios").value;
+        cantidad = document.getElementById("cantidad");
+        n1 = cantidad.value;
+        n2 = cart.articles[i].unitCost;
+        r = n1*n2; 
+        document.getElementById("total").innerHTML = '$' + r;
+    
     }   
     if (x === "premium"){
         e = r * 0.15;
@@ -133,9 +129,13 @@ function Validate(cantidad, calle, num, esq){
 
     } else {
         delet();
-        alert("La orden ha sido generada con éxito");
+        comprafin(buy.msg);
     }
 }
+
+function comprafin(){
+        alert(buy.msg);
+};
 
 function delet() {
     document.getElementById("calle").value = "";
@@ -205,11 +205,19 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             cart = resultObj.data;
             carrito(cart.articles);
-            multiplicar(cart.articles);
+            multiplicar(cart.articles); 
             Subtotal(cart.articles);
             total(cart.articles);
             flechas(cart.articles);
             formapago();
         }
     });
+    getJSONData(CART_BUY_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            buy = resultObj.data;
+        }
+    });
+
+
 });
